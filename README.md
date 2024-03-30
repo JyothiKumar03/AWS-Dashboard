@@ -46,7 +46,14 @@ Start the development server:
 npm start
 ```
 
-Enhancements
+## ScreenShots
+
+<img width="957" alt="image" src="https://github.com/JyothiKumar03/AWS-Dashboard/assets/88045362/d39f20bc-3ed6-4865-9b4a-0dbc2363ce36">
+
+<img width="952" alt="image" src="https://github.com/JyothiKumar03/AWS-Dashboard/assets/88045362/e190c3cd-1748-4a9b-91de-37a2fed27941">
+
+
+## Enhancements
 Implement dynamic creation of multiple IAM users through code.
 
 ## Resources
