@@ -26,13 +26,13 @@ git clone https://github.com/JyothiKumar03/AWS-Dashboard
 
 ```
 
-##Install dependencies:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-##ENV FILE IN BACKEND - 
+ENV FILE IN BACKEND - 
 
 ``` bash
 export AWS_ACCESS_KEY_ID=<Your AWS Access Key ID>
@@ -40,19 +40,19 @@ export AWS_SECRET_ACCESS_KEY=<Your AWS Secret Access Key>
 export AWS_REGION=<Your AWS Region>
 ```
 
-##Start the development server:
+Start the development server:
 
 ``` bash
 npm start
 ```
 
-##Enhancements
+Enhancements
 Implement dynamic creation of multiple IAM users through code.
 
-##Resources
+## Resources
 AWS Route 53 Documentation  [https://aws.amazon.com/route53/]
 
-Contributing
+## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 
