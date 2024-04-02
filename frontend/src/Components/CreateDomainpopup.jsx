@@ -8,85 +8,60 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import { useLocation , useParams } from "react-router-dom";
 
-const UpdateDNSRecord = ({ initialRecordType, initialRecordValue, onSubmit, onClose }) => {
-  // const [domainName, setDomainName] = useState(initialDomainName);
-  const [recordType, setRecordType] = useState(initialRecordType);
-  const [recordValue, setRecordValue] = useState(initialRecordValue);
-  const [ttl, setTTL] = useState("3600"); // TTL state
-  const location = useLocation();
-  const { title } = location.state || {};
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
+const CreateDomain = ({ onSubmit, onClose }) => {
+  const [domainName, setDomainName] = useState("");
+  const [recordType, setRecordType] = useState("");
+  const [recordValue, setRecordValue] = useState("");
+  const [description, setDescription] = useState("");
 
-
- // Function to handle changes in record type
-// Function to handle changes in record type
-const handleRecordTypeChange = (event) => {
+  const handleRecordTypeChange = (event) => {
     const selectedType = event.target.value;
     setRecordType(selectedType);
-    // Set record value and TTL based on record type
     switch (selectedType) {
       case "A":
         setRecordValue("192.0.2.1");
-        setTTL("3600");
         break;
       case "AAAA":
         setRecordValue("2001:0db8:85a3:0000:0000:8a2e:0370:7334");
-        setTTL("3600");
         break;
       case "CNAME":
         setRecordValue("example.com");
-        setTTL("3600");
         break;
       case "MX":
         setRecordValue("10 mail.example.com");
-        setTTL("3600");
         break;
       case "NS":
         setRecordValue("ns1.example.com");
-        setTTL("3600");
         break;
       case "PTR":
         setRecordValue("example.com");
-        setTTL("3600");
         break;
       case "SOA":
-        setRecordValue("ns1.example.com hostmaster.example.com 2022032801 7200 3600 1209600 3600");
-        setTTL("3600");
+        setRecordValue(
+          "ns1.example.com hostmaster.example.com 2022032801 7200 3600 1209600 3600"
+        );
         break;
       case "SRV":
         setRecordValue("0 5 5269 xmpp-server.example.com");
-        setTTL("3600");
         break;
       case "TXT":
         setRecordValue("sample text");
-        setTTL("3600");
         break;
       case "DNSSEC":
         setRecordValue("true");
-        setTTL("3600");
         break;
       default:
         setRecordValue("");
-        setTTL("3600");
     }
   };
-  
-  
 
   const handleSubmit = () => {
-    const updatedDNSRecord = {
-      Name : title,
-      Type : recordType,
-      Value : recordValue,
-      ttl, 
+    const newDomain = {
+    domainName,
+    description
     };
-
-    onSubmit(updatedDNSRecord);
+    onSubmit(newDomain);
   };
 
   return (
@@ -117,7 +92,7 @@ const handleRecordTypeChange = (event) => {
           <CloseIcon />
         </IconButton>
         <Typography variant="h6" gutterBottom>
-          Update DNS Record
+          Create HostedZone
         </Typography>
         <Typography variant="body1" gutterBottom>
           Domain Name
@@ -125,21 +100,20 @@ const handleRecordTypeChange = (event) => {
         <TextField
           fullWidth
           id="domain-name"
-          value={title}
-          // onChange={(e) => setDomainName(e.target.value)}
-          disabled
+          className="mb-2"
+          value={domainName}
+          onChange={(e) => setDomainName(e.target.value)}
         />
-        <Typography variant="body1" gutterBottom>
+        {/* <Typography variant="body1" gutterBottom>
           Record Type
         </Typography>
-        <FormControl fullWidth>
-          <Select
-            labelId="record-type-label"
-            id="record-type"
-            value={recordType}
-            onChange={handleRecordTypeChange} // Call handleRecordTypeChange on change
-          >
-           <MenuItem value="A">A (Address)</MenuItem>
+        <Select
+          value={recordType}
+          onChange={handleRecordTypeChange}
+          fullWidth
+          id="record-type"
+        >
+          <MenuItem value="A">A (Address)</MenuItem>
           <MenuItem value="AAAA">AAAA (IPv6 Address)</MenuItem>
           <MenuItem value="CNAME">CNAME (Canonical Name)</MenuItem>
           <MenuItem value="MX">MX (Mail Exchange) Record</MenuItem>
@@ -149,32 +123,23 @@ const handleRecordTypeChange = (event) => {
           <MenuItem value="SRV">SRV (Service) Record</MenuItem>
           <MenuItem value="TXT">TXT (Text) Record</MenuItem>
         <MenuItem value="DNSSEC">DNSSEC</MenuItem>
-          </Select>
-        </FormControl>
+        </Select> */}
         <Typography variant="body1" gutterBottom>
-          Record Value
+          Description
         </Typography>
         <TextField
           fullWidth
-          id="record-value"
-          value={recordValue}
-          onChange={(e) => setRecordValue(e.target.value)}
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
-        <Typography variant="body1" gutterBottom>
-          TTL
-        </Typography>
-        <TextField
-          fullWidth
-          id="record-ttl"
-          value={ttl}
-          disabled
-        />
+        
         <Button variant="contained" onClick={handleSubmit}>
-          Update DNS Record
+          Create HostedZone
         </Button>
       </Box>
     </Popover>
   );
 };
 
-export default UpdateDNSRecord;
+export default CreateDomain;

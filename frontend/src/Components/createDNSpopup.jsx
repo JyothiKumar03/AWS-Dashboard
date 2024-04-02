@@ -8,11 +8,16 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import { useLocation , useParams} from "react-router-dom";
 
-const CreateDNSRecord = ({ onSubmit, onClose }) => {
-  const [domainName, setDomainName] = useState("");
+const CreateDNSRecord = ({onSubmit, onClose }) => {
+  // const [domainName, setDomainName] = useState("");
   const [recordType, setRecordType] = useState("");
   const [recordValue, setRecordValue] = useState("");
+  const location = useLocation();
+  const { title } = location.state || {};
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
 
   const handleRecordTypeChange = (event) => {
     const selectedType = event.target.value;
@@ -56,7 +61,7 @@ const CreateDNSRecord = ({ onSubmit, onClose }) => {
 
   const handleSubmit = () => {
     const newDNSRecord = {
-      domainName,
+      domainName:title,
       recordType,
       recordValue,
     };
@@ -100,8 +105,9 @@ const CreateDNSRecord = ({ onSubmit, onClose }) => {
         <TextField
           fullWidth
           id="domain-name"
-          value={domainName}
-          onChange={(e) => setDomainName(e.target.value)}
+          value={title}
+          disabled
+          // onChange={(e) => setDomainName(e.target.value)}
         />
         <Typography variant="body1" gutterBottom>
           Record Type

@@ -5,32 +5,40 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import UserAuthorize from "./UserAuthorize";
 import UserPublic from "./UserPublic";
+import Dashboard from "../Components/Dashboard";
 
 export default function UserRoutes() {
   return (
     <div>
       <Routes>
         <Route
-          path="/"
+          path="/home/*"
           element={
-            
               <Home />
           }
         />
         <Route
-          path="/login"
+          path="/"
           element={
-            <UserPublic>
+            // <UserPublic>
               <Login />
-            </UserPublic>
+            // </UserPublic>
           }
         />
         <Route
           path="/signup"
           element={
-            <UserPublic>
+            // <UserPublic>
               <SignUp />
-            </UserPublic>
+            // </UserPublic>
+          }
+        />
+        <Route
+          path="/records"
+          element={
+            // <UserPublic>
+              <Dashboard />
+            // </UserPublic>
           }
         />
       </Routes>
