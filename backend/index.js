@@ -4,7 +4,7 @@ import cors from "cors";
 import route from "./Routes/route.js";
 import configureAWS from './config/awsConfig.js'
 import dnsRoutes from "./Routes/dnsRoutes.js"
-
+import domainRoutes from "./Routes/domainRoutes.js"
 
 const app = express();
 
@@ -21,6 +21,7 @@ app.use(
 
 app.use("/", route);
 app.use("/api/dns", dnsRoutes);
+app.use("/api/domain", domainRoutes)
 
 // configureAWS();
 

@@ -11,7 +11,7 @@ import Route53 from "aws-sdk/clients/route53.js";
 
 const router = express.Router();
 
-router.get("/hostedZones", listHostedZones);
+router.get("/hostedZones/:hostedZoneId", listHostedZones);
 router.post("/dns", createDNSRecord);
 router.put("/dns/:id", updateDNSRecord);
 router.delete("/dns/:id", deleteDNSRecord);

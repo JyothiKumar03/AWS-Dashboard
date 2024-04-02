@@ -1,7 +1,7 @@
 // route.js
 
 import express from "express";
-import { userRegistration, userLogin } from "../Controllers/controllers.js";
+import { userRegistration, userLogin } from "../Controllers/userOauthController.js";
 
 const router = express.Router();
 

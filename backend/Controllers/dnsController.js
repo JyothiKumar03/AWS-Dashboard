@@ -26,8 +26,10 @@ const route53 = new Route53();
 
 export const listHostedZones = async (req, res) => {
   try {
+    const {hostedZoneId} =  req.params;
+    console.log(hostedZoneId);
     const { HostedZones } = await route53.listHostedZones().promise();
-    const hostedZoneId = HostedZones[0].Id; // Assuming you have only one hosted zone
+    // const hostedZoneId = HostedZones[0].Id; 
     
     const params = {
       HostedZoneId: hostedZoneId
@@ -46,9 +48,9 @@ export const listHostedZones = async (req, res) => {
 // Controller to create a new DNS record
 export const createDNSRecord = async (req,res) => {
   try {
-    const {domainName, recordType, recordValue} = req.body;
+    const {dnsRecordData, code} = req.body;
+    const {domainName, recordType, recordValue} = dnsRecordData
     console.log('rq-body - ',req.body);
-    // Construct parameters for the change resource record sets request
     const params = {
       ChangeBatch: {
         Changes: [
@@ -63,15 +65,14 @@ export const createDNSRecord = async (req,res) => {
           },
         ],
       },
-      HostedZoneId: 'Z091167816II1GE10RJ8M' // The hosted zone ID for your domain
+      HostedZoneId: code
     };
 
-    // Send the change resource record sets request to create the DNS record
     const data = await route53.changeResourceRecordSets(params).promise();
 
     console.log(data);
 
-    return data; // Return the response from the AWS API
+    return data;
   } catch (error) {
     console.error(error);
     res.status(500).json('Failed to create DNS record');
@@ -81,23 +82,22 @@ export const createDNSRecord = async (req,res) => {
 // Controller to update a DNS record
 export const updateDNSRecord = async (req, res) => {
   try {
-    // Implement logic to update DNS record
-    const record = req.body;
+    const {dnsRecordData, code} = req.body;
     console.log('update - ',req.body)
-    if (record.recordType !== 'SOA') {
+    if (dnsRecordData.recordType !== 'SOA') {
       const params = {
-        HostedZoneId: 'Z091167816II1GE10RJ8M', // Replace with your hosted zone ID
+        HostedZoneId: req.body.code, // Replace with your hosted zone ID
         ChangeBatch: {
           Changes: [
             {
               Action: 'UPSERT',
               ResourceRecordSet: {
-                Name: req.body.domainName,
-                Type: req.body.recordType,
-                TTL: 300, 
+                Name: dnsRecordData.Name,
+                Type: dnsRecordData.Type,
+                TTL: dnsRecordData.ttl, 
                 ResourceRecords: [
                   {
-                    Value: req.body.recordValue,
+                    Value: dnsRecordData.Value,
                   },
                 ],
               },
@@ -122,11 +122,13 @@ export const deleteDNSRecord = async (req, res) => {
   try {
     const { id } = req.params;
     const { Name, Type, ResourceRecords, TTL } = req.body;
-    console.log('del - ', req.body);
+    const { code } = req.query; // Extract code from URL query parameters
+    console.log('del - ', req.body)
+    console.log('del - ', req.query, req.params);
     // Check if the record type is not SOA before proceeding with deletion
     if (Type !== 'SOA') {
       const params = {
-        HostedZoneId: 'Z091167816II1GE10RJ8M',
+        HostedZoneId: code,
         ChangeBatch: {
           Changes: [
             {

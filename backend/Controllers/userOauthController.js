@@ -67,3 +67,69 @@ export async function userLogin(req, res) {
     console.log(error.message);
   }
 }
+
+
+// import { CognitoIdentityServiceProvider } from "aws-sdk";
+
+// const cognito = new CognitoIdentityServiceProvider();
+
+// function generateJwtToken(email){
+//   const payload = {email:email};
+//   const options = {
+//     expiresIn: '3h', 
+//   };
+//   const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, options);
+//   return token;
+// }
+
+// export async function userRegistration(req, res) {
+//   try {
+//     const { name, email, password } = req.body;
+    
+//     await cognito.signUp({
+//       ClientId: process.env.AWS_COGNITO_CLIENT_ID,
+//       Username: email,
+//       Password: password,
+//       UserAttributes: [
+//         { Name: "name", Value: name },
+//         { Name: "email", Value: email }
+//       ]
+//     }).promise();
+
+//     const token = generateJwtToken(email); 
+
+//     let user = {
+//       username: name,
+//       email : email,
+//       token : token
+//     }
+//     res.status(200).json(user);
+//   } catch (error) {
+//     console.error("User registration error:", error);
+//     res.status(500).json({ error: "User registration failed" });
+//   }
+// }
+
+// export async function userLogin(req, res) {
+//   try {
+//     const { email, password } = req.body;
+
+//     const authResult = await cognito.adminInitiateAuth({
+//       AuthFlow: "ADMIN_NO_SRP_AUTH",
+//       UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID,
+//       ClientId: process.env.AWS_COGNITO_CLIENT_ID,
+//       AuthParameters: {
+//         USERNAME: email,
+//         PASSWORD: password
+//       }
+//     }).promise();
+
+//     const token = generateJwtToken(email); 
+
+//     // Return token to client
+//     res.json({ token });
+//   } catch (error) {
+//     console.error("User login error:", error);
+//     res.status(500).json({ error: "User login failed" });
+//   }
+// }
