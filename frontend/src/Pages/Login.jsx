@@ -11,7 +11,7 @@ function Login() {
   const loginHandle = () => {
     // Redirect to the Cognito hosted UI login page
     // window.location.href = "https://demo-user-pool-007.auth.us-west-2.amazoncognito.com/login?client_id=12g5eh2kvpmg95ne5vc1luoi74&response_type=code&scope=email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fhome"
-    window.location.href = "https://demo-user-pool-007.auth.us-west-2.amazoncognito.com/login?client_id=12g5eh2kvpmg95ne5vc1luoi74&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fawsroute53dashboard.netlify.app%2Fhome%2F%2A"
+    window.location.href = "https://demo-user-pool-007.auth.us-west-2.amazoncognito.com/login?client_id=12g5eh2kvpmg95ne5vc1luoi74&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fawsroute53dashboard.netlify.app%2Fhome"
     
   };
 
