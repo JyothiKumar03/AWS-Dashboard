@@ -12,7 +12,7 @@ export default function UserRoutes() {
     <div>
       <Routes>
         <Route
-          path="/home/*"
+          path="/home"
           element={
               <Home />
           }
