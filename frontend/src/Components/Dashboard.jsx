@@ -145,7 +145,7 @@ function Dashboard() {
                 <Button
                   className="flex items-center gap-3"
                   size="sm"
-                  onClick={() => navigate("/home")}
+                  onClick={() => navigate("/")}
                 >
                   Back to Zones
                 </Button>

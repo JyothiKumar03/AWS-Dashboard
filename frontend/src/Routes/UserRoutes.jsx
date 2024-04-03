@@ -12,19 +12,19 @@ export default function UserRoutes() {
     <div>
       <Routes>
         <Route
-          path="/home/*"
+          path="/"
           element={
               <Home />
           }
         />
-        <Route
+        {/* <Route
           path="/"
           element={
             // <UserPublic>
               <Login />
             // </UserPublic>
           }
-        />
+        /> */}
         <Route
           path="/signup"
           element={
